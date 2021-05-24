@@ -4,6 +4,9 @@ import { StarIcon } from "@heroicons/react/solid";
 import Currency from "react-currency-formatter"
 import {useDispatch} from 'react-redux';
 import {addToBasket} from "../slices/basketSlice"
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer} from "react-toastify";
+
 
 const MAX_RATING = 5;
 const MIN_RATING = 1;
@@ -32,20 +35,25 @@ const Product = ({ id, title, price, description, category, image }) => {
         }
 
         // sending the product as an action to the REDUX store... the basket slice
+        toast("Added to basket", {
+            type: "success",
+          });
         dispatch(addToBasket(product))
     }
 
 
     return (
+        
         <div className="relative flex flex-col m-5 bg-white z-30 p-10">
+            <ToastContainer/>
             {/* category */}
             <p className="absolute top-2 right-2 text-xs italic text-gray-500">{category}</p>
 
             {/* image */}
-            <Image src={image} height={200} width={200} objectFit="contain" />
+            <Image src={image} height={200} width={200} objectFit="contain"/>
 
             {/* title */}
-            <h2 className="my-3">{title}</h2>
+            <h2 className="my-3 font-bold">{title}</h2>
 
             {/* rating */}
             <div className="flex">
@@ -57,11 +65,11 @@ const Product = ({ id, title, price, description, category, image }) => {
             </div>
             
             {/* description */}
-            <p className="text-sm my-2 line-clamp-2">{description}</p>
+            <p className="font-semibold text-sm my-2 line-clamp-2">{description}</p>
 
             {/* currency */}
-            <div className="mb-5">
-                <Currency quantity={price} currency="INR"/ >
+            <div className="mb-5 font-semibold">
+                <Currency quantity={price} currency="GBP"/ >
             </div>
 
             {/* hasPrime */}
@@ -73,7 +81,7 @@ const Product = ({ id, title, price, description, category, image }) => {
             )}
 
             {/* add to basket button */}
-            <button onClick={addItemToBasket} className="mt-auto button">Add to Basket</button>
+            <button onClick={addItemToBasket} className="mt-auto button font-extrabold">Add to Basket</button>
 
         </div>
     );

@@ -55,7 +55,7 @@ const Header = () => {
                         <p className="font-extrabold md:text-sm">{session ? "Sign Out" : "Accounts & lists"}</p>
                     </div>
 
-                    <div className="link">
+                    <div onClick={() => session && router.push("/orders")} className="cursor-pointer link">
                         <p>Returns</p>
                         <p className="font-extrabold md:text-sm">& Orders</p>
                     </div>
